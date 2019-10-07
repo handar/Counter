@@ -85,7 +85,7 @@
     $('#confirm').click(function() {
       console.log("confirm");
       //display new count
-      getCount({
+      getCount({ //obj
         cancel: false,
         confirm: true
       });
@@ -95,7 +95,7 @@
     $('#cancel').click(function() {
       console.log("cancel");
       //display old count
-      getCount({
+      getCount({ //obj
         cancel: true,
         confirm: false
       });
