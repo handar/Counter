@@ -33,4 +33,4 @@ Based on the description of user scenarios given in the PDF, I sketched out the 
 **Authentication:** JSON Web Tokens
 
 # Challenges and the Learning Process
-As someone who has been on the observing end of backend development, working on a full stack project from start to finish has been a very fun, challenging, and rewarding process. Resources used to put together the backend were Udemy, Youtube, Google, and studying backend code files from projects I have/am a part of.
+As someone who has been on the observing end of backend development, working on a full stack project from start to finish has been a very fun, challenging, and rewarding process. Resources used to put together the backend were Udemy, Youtube, Google, and studying backend files from projects I have/am a part of.
