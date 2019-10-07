@@ -11,6 +11,7 @@ Welcome to Counter, the handy incrementation tool!
 ![enter image description here](https://lh3.googleusercontent.com/-barnSB4yMVa6S3AZdwWo8V4XMoOw7o6eW10yGh5eJcULKuMP8fm2dRI6pKB5XSU7imxRF6PuKGdXg)
 
 2. Using the counter with a Bootstrap modal popup
+
 ![enter image description here](https://lh3.googleusercontent.com/fZEysXX6YQDqL_K4qPn3ww669AK1ZlxGykb7uEbzU4TCOwwOCX86618oPvSsPDci2po12JLMevfQyg)
 
 # Features and UI design
