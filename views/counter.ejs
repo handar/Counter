@@ -1,0 +1,157 @@
+<%- include('partials/header') %>
+
+<div class="navbar">
+  <div class="col-sm-11"></div>
+  <div class="col-sm-1"> <button class="btn btn-link text-white" id="logout">Logout</button></div>
+</div>
+
+<div class="vertical-center">
+  <div class="container mt-5">
+    <form class="" target="myWindow">
+      <h2 class="text-center text-white">Count:
+        <span id="count"> <%= myCurrentNum %> </span>
+        <button type="button" id="increment" class="btn btn-increment btn-md" name="incrementButton">Increment</button></h2>
+    </form>
+  </div>
+</div>
+
+<!--bootstrap modal-->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Increment</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container">
+          <form>
+            <h2 class="text-center " id="current">Current Count: </h2>
+            <h2 class="text-center " id="next"> Next Count: </h2>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+        <button type="button" id="confirm" class="btn btn-custom btn-md" name="chooseButton" value="confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup function-->
+<script language="javascript">
+  //jquery
+  //make function available after page is loaded
+  $(document).ready(function() {
+    var url = window.location.href; //defined
+    let urlArray = url.split('/'); //break up the pathname
+    let baseUrl = urlArray[0] + '//' + urlArray[2];
+    checkToken();
+
+    function checkToken() {
+      let token = localStorage.getItem('Token'); //authentication token element
+
+      //if it is not the token or token is undefined, then
+      if (!token || token == 'undefined') {
+        window.location.href = baseUrl;
+      } else {
+        console.log("Token : ", token);
+      }
+    }
+
+    //click logout button
+    $('#logout').click(function() {
+      //remove authentication token
+      localStorage.removeItem('Token');
+      checkToken();
+    });
+
+    //click increment button
+    $('#increment').click(function() {
+      console.log("Click Increment");
+      //show bootstrap modal
+      $('#myModal').modal("show");
+      counter(); //perform the counter function
+    });
+
+    //click confirm button
+    $('#confirm').click(function() {
+      console.log("confirm");
+      //display new count
+      getCount({
+        cancel: false,
+        confirm: true
+      });
+    });
+
+    //click cancel button
+    $('#cancel').click(function() {
+      console.log("cancel");
+      //display old count
+      getCount({
+        cancel: true,
+        confirm: false
+      });
+    });
+
+    function counter() {
+      //use ajax for asynchronous requests
+      $.ajax({
+        type: "POST", //method
+        url: baseUrl + "/result", //the url the ajax request is sent to
+        headers: {
+          authorization: 'Bearer ' + localStorage.getItem('Token') //jwt
+        },
+
+        accept: 'application/json',
+        data: {},
+
+        error: function(error) {
+          console.log("Error : ", error);
+        },
+        success: function(data) {
+          console.log("Login done ", data);
+          if (data.success) {
+            //display current and next numbers
+            $('#current').html('Current Count: ' + data.message.myOldNum);
+            $('#next').html('Next Count: ' + data.message.myNextNum);
+          }
+        }
+      });
+    }
+
+    function getCount(obj) {
+      console.log("Object : ", obj);
+      if (obj != 'undefined')
+        $.ajax({
+          type: "POST",
+          url: baseUrl + "/counter",
+          headers: {
+            authorization: 'Bearer ' + localStorage.getItem('Token')
+          },
+
+          accept: 'application/json',
+          data: obj,
+          body: obj,
+          error: function(error) {
+            console.log("Error : ", error);
+            $('#myModal').modal("hide");
+          },
+          success: function(data) {
+            console.log("Count done ", data);
+            $('#count').html(data.myCurrentNum);
+            $('#myModal').modal("hide");
+          }
+        });
+    }
+  });
+</script>
+
+<%- include('partials/footer') %>

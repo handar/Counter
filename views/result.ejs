@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<script>
+  $(document).ready(function(){
+    checkToken();
+    function checkToken()
+    {
+      let token = localStorage.getItem('Token');
+
+      if(!token)
+      {
+        var url = window.location.href;
+        let urlArray = url.split('/');
+        let baseUrl = urlArray[0]+'//'+urlArray[2];
+
+        window.close();
+        window.location.href = baseUrl;
+      }
+      else{
+        console.log("Token : ",token);
+      }
+    }
+
+  });
+</script>
+
+<%- include('partials/footer') %>
