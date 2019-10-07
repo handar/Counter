@@ -3,6 +3,7 @@ Welcome to Counter, the handy incrementation tool!
 
     Installation Instructions:
     Clone or download the repo
+    In terminal, install nodemon - npm install -g nodemon
     In terminal, cd to the folder location and type in "nonemon app.js"
     In browser, navigate to http://localhost:3000/
 
