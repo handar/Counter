@@ -20,13 +20,12 @@ Based on the description of user scenarios given in the PDF, I sketched out the 
 
 ![enter image description here](https://lh3.googleusercontent.com/5--aLQTgEZ3-GMNCD4z1NhqCsKLDk6YujWxRJLa3YGIYWIyft5-y8DK_2SfyghRYC4g6PFlRj-xOuw)
 # Framework and technology used
+
 **Frontend:** HTML, CSS, Bootstrap, Javascript, jQuery
 
-&nbsp;
 
 **Backend:** Node.js, Ejs, JSON
 
-&nbsp;
 
 **Other:** Ajax
 
