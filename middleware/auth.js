@@ -1,3 +1,5 @@
+//write a function that acts as middleware to get a token from a request
+//will proceed only when token is validated
 let jwt = require('jsonwebtoken');
 const config = require('../config.js'); //secret
 
@@ -18,7 +20,7 @@ let checkToken = (req, res, next) => {
           success: false,
           message: 'Token is not valid'
         });
-        return res.render("login");
+        return res.render("login"); //return login.ejs
       } else {
         req.decoded = decoded;
         next();

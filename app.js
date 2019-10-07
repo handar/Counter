@@ -39,23 +39,22 @@ app.post("/login", function(req, res) {
   console.log("body : ",req.body);
 
   if (requestedUsername != username || requestedPassword != password) {
-    //tell user they entered in incorrect username or password
     res.status(403).json({
       success: false,
       message: 'Incorrect username or password'
     });
   } else {
-      //jwt authentication
-      let token = jwt.sign({username: username},
+      //jwt authentication, takes in payload, secret, and options as arguments
+      let token = jwt.sign({username: username}, //find out which user is owner of token
         config.secret,
-        { expiresIn: '24h' // expires in 24 hours
+        { expiresIn: '24h' // option, expires in 24 hours
         }
       );
       // return the jwt token for future API calls
       res.json({
         success: true,
         message: 'Authentication successful!',
-        token: token
+        token: token //generated token is string
       });
   }
 });
@@ -69,6 +68,7 @@ app.get("/counter",function(req, res) {
 app.post("/counter",auth.checkToken,function(req, res) {
   var cancelValue = req.body.cancel;
   var confirmValue = req.body.confirm;
+
   console.log(req.body);
   if (cancelValue != 'false'){
     console.log("CANCEL",currentNum);
